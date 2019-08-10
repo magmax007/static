@@ -13,6 +13,15 @@ pipeline {
 				}
 			}
 		}
-	}
+		stage('Check Website') {
+			steps {
+				timeout(time: 1, unit: 'MINUTES') {
+					retry(3) {
+						sh 'curl -Is https://pipelineudacityproject4.s3.us-east-2.amazonaws.com/index.html  | head -1'
+						}		
+					}
+				}
+			}
+		}
 }
 
