@@ -5,7 +5,7 @@ pipeline {
 			steps {
 				tidy -q -e *.html
 			}
-		}
+
 		stage('Upload to AWS') {
 			steps {
 				sh 'echo "Hello World"'
@@ -16,6 +16,7 @@ pipeline {
 				withAWS(credentials:'aws-static') {
     					s3Upload(file:'index.html', bucket:'pipelineudacityproject4', path:'index.html')
 				}
+			}
 			}
 		}
 	}
